@@ -8,38 +8,24 @@ const calculator = (expression) => {
     let tokens = expression.split(' ');
     let numberStack = [];
     let supportedOperators = {
-        '+': {
-            operandCount: 2,
-            result: (x, y) => x + y
-        },
-        '-': {
-            operandCount: 2,
-            result: (x, y) => x - y
-        },
-        '*': {
-            operandCount: 2,
-            result: (x, y) => x * y
-        },
-        '/': {
-            operandCount: 2,
-            result: (x, y) => x / y
-        },
-        'SQ': {
-            operandCount: 1,
-            result: (x) => x * x
-        }
+        '+': (x, y) => x + y,
+        '-': (x, y) => x - y,
+        '*': (x, y) => x * y,
+        '/': (x, y) => x / y,
+        'SQ':(x) => x * x
     };
     try {
         tokens.forEach((token) => {
             if (!isNaN(parseFloat(token))) {
                 numberStack.push(parseFloat(token));
             } else if (isNaN(parseFloat(token)) && Object.keys(supportedOperators).indexOf(token) >= 0) {
-                if(numberStack.length >= supportedOperators[token].operandCount) {
+                let operandCount = supportedOperators[token].length;
+                if(numberStack.length >= operandCount) {
                     let operands = [];
-                    for (let x=0; x < supportedOperators[token].operandCount; x++) {
+                    for (let x=0; x < operandCount; x++) {
                         operands.push(numberStack.pop());
                     }
-                    numberStack.push(supportedOperators[token].result.apply(null, operands.reverse()));
+                    numberStack.push(supportedOperators[token].apply(null, operands.reverse()));
                 } else {
                     throw RangeError();
                 }
