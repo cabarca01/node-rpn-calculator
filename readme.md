@@ -2,7 +2,7 @@
 
 The following mini-project implements an RPN Type calculator which uses Reverse Polish Notation to evaluate a mathematical expression and return the corresponding result.
 
-This mini-project curently implements the following operations:
+This mini-project currently implements the following operations:
 
 | Operator | Arguments | Expected Result |
 |----------|-----------|-----------------|
